@@ -229,9 +229,10 @@ global_internal void build_entity_control_ui() {
 }
 
 global_internal void build_stat_ui() {
-    if (mu_begin_window_ex(ctx, "Interplay Stats", mu_rect(0, 0, 200, 120),
+    char buf[128];
+    sprintf(buf, "Interplay Stats (%dx%d)", config.width, config.height);
+    if (mu_begin_window_ex(ctx, buf, mu_rect(0, 0, 200, 120),
                            MU_OPT_NOCLOSE | MU_OPT_NORESIZE)) {
-        char *buf = "";
         sprintf(buf, "Update: %.3fms", loop_timing.update);
         mu_text(ctx, buf);
         sprintf(buf, "Render: %.3fms", loop_timing.render);

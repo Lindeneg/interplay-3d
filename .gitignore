@@ -3,6 +3,7 @@
 # Build directory
 build
 .cache
+cmake-build-debug
 compile_commands.json
 
 # RemedyBG
@@ -10,10 +11,13 @@ compile_commands.json
 
 # Assets
 lib
-assets
 *.obj
 *.png
 *.ttf
+
+# ignore-ignore default font and simple cube
+!assets/open-sans.ttf
+!assets/cube.obj
 
 # Clion stuff
 .idea

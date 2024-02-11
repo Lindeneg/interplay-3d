@@ -83,7 +83,7 @@ global_internal void update_mesh(entity_t *entity, float dt) {
             // product)
             float dot_normal_camera = vec3f_dot(face_normal, camera_ray);
             // bypass triangles that are looking away from the camera
-            if (dot_normal_camera < 0) {
+            if (is_lesserf(dot_normal_camera, 0.0f)) {
                 continue;
             }
         }
@@ -112,7 +112,7 @@ global_internal void update_mesh(entity_t *entity, float dt) {
                 projected_points[v] = mat4f_mul_vec4f(
                     perspective.projection, triangle_after_clipping.points[v]);
                 // perform perspective divide
-                if (projected_points[v].w != 0) {
+                if (!is_equalf(projected_points[v].w, 0.0f)) {
                     projected_points[v].x /= projected_points[v].w;
                     projected_points[v].y /= projected_points[v].w;
                     projected_points[v].z /= projected_points[v].w;
@@ -161,7 +161,7 @@ global_internal void update_mesh(entity_t *entity, float dt) {
     }
 }
 
-global_internal void render_mesh(entity_t *entity) {
+global_internal void render_mesh(const entity_t *entity) {
     mesh_t *mesh = (mesh_t *)entity->data;
     size_t triangle_count = array_size(mesh->triangles);
     for (int i = 0; i < triangle_count; i++) {

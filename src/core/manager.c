@@ -2,7 +2,6 @@
 
 #include <SDL_events.h>
 #include <SDL_timer.h>
-#include <stdbool.h>
 #include <time.h>
 
 #include "../entities/entity.h"
@@ -14,7 +13,6 @@
 #include "../ui.h"
 #include "../utils.h"
 #include "./context.h"
-#include "./linked-list.h"
 
 #define TIME_FN_CALL(fn, var)                                     \
     {                                                             \

@@ -9,7 +9,6 @@
 #include "../log.h"
 #include "../utils.h"
 #include "./context.h"
-#include "./linked-list.h"
 #include "./mem.h"
 
 global_internal bool texture_load_file(texture_t *texture,

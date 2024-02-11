@@ -85,6 +85,7 @@ bool context_parse_config_file(char cfg_file[PATH_LENGTH]) {
     }
     char line[512];
     while (fgets(line, 512, file)) {
+        if (strncmp(&line[0], "#", 1) == 0) continue;
         if (strncmp(line, "log-level=", 1) == 0) {
             int log_level;
             sscanf_s(line, "log-level=%d", &log_level);

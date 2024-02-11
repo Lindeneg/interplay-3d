@@ -1,7 +1,5 @@
 #include "array.h"
 
-#include <stdint.h>
-
 #include "../globals.h"
 #include "./mem.h"
 

@@ -29,7 +29,7 @@ global_internal void clip_polygon_against_plane(polygon_t *polygon, int plane) {
         current_dot = vec3f_dot(
             vec3f_subtract_new(*current_vertex, plane_point), plane_normal);
         // if we changed from inside to outside or from outside to inside
-        if (current_dot * previous_dot < 0) {
+        if (is_lesserf(current_dot * previous_dot, 0.0f)) {
             // find interpolation factor t
             float t = previous_dot / (previous_dot - current_dot);
             // calculate intersection point I = Q1 + t(Q2-Q1)
@@ -50,7 +50,7 @@ global_internal void clip_polygon_against_plane(polygon_t *polygon, int plane) {
             num_inside_vertices++;
         }
         // if dot is greater than 0, it is inside plane
-        if (current_dot > 0) {
+        if (is_greaterf(current_dot, 0.0f)) {
             inside_vertices[num_inside_vertices] = vec3f_copy(current_vertex);
             inside_tex_coords[num_inside_vertices] =
                 texture_coords_clone(current_texcoord);

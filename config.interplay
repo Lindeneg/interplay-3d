@@ -10,9 +10,8 @@ ttf_file=./assets/open-sans.ttf
 
 # integer between 0..5
 # 0=silent, 5=verbose
-log-level=5
+log-level=4
 
-# buffer-size, if omitted fullscreen values are used
-width=800
-height=600
-
+# buffer-size if set to 0 fullscreen values are used
+width=0
+height=0

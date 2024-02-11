@@ -2,6 +2,7 @@
 
 #include "./renderer.h"
 #include "./screen.h"
+#include "../utils.h"
 
 #define ptr_swap(type, ptr1, ptr2) \
     type tmp = *ptr1;              \
@@ -74,7 +75,7 @@ global_internal void draw_triangle_pixel(int x, int y, vec4f_t point_a,
     // adjust 1/w so pixels that are closer to camera have smaller value
     interpolated_reciprocal_w = 1.0f - interpolated_reciprocal_w;
     // only draw pixel if depth is less than previously stored in z-buffer
-    if (interpolated_reciprocal_w < screen_z_buffer_at(x, y)) {
+    if (is_lesserf(interpolated_reciprocal_w, screen_z_buffer_at(x, y))) {
         screen_put_back_buffer(x, y, color);
         screen_put_z_buffer(x, y, interpolated_reciprocal_w);
     }
@@ -120,7 +121,7 @@ global_internal void draw_textured_triangle_pixel(
     // adjust 1/w so pixels that are closer to camera have smaller value
     interpolated_inv_w = 1.0f - interpolated_inv_w;
     // only draw pixel if depth is less than previously stored in z-buffer
-    if (interpolated_inv_w < screen_z_buffer_at(x, y)) {
+    if (is_lesserf(interpolated_inv_w, screen_z_buffer_at(x, y))) {
         screen_put_back_buffer(
             x, y,
             ((uint32_t *)

@@ -19,7 +19,7 @@ typedef struct entity {
     // will save 8x3 bytes per entity
     void (*update_cb)(struct entity *entity, float dt);
 
-    void (*render_cb)(struct entity *entity);
+    void (*render_cb)(const struct entity *entity);
 
     void (*destroy_cb)(struct entity *entity);
 

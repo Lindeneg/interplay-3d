@@ -3,8 +3,8 @@
 #include <SDL_image.h>
 #include <SDL_render.h>
 #include <assert.h>
-#include <stdbool.h>
 
+#include "../core/context.h"
 #include "../core/mem.h"
 #include "../log.h"
 
@@ -19,9 +19,6 @@ global_internal SDL_Renderer *renderer = NULL;
 global_internal SDL_Window *window = NULL;
 global_internal SDL_DisplayMode display_mode;
 
-// creates window, renderer and front-buffer
-// if already allocated but width/height has changed
-// delete old stuff and allocate new stuff
 global_internal bool setup_sdl_window(void) {
     if (window == NULL) {
         window = SDL_CreateWindow("Interplay 3D", SDL_WINDOWPOS_CENTERED,
@@ -115,6 +112,9 @@ bool screen_set_size(vec2i_t size) {
     z_buffer = (float *)reserve_mem(sizeof(float) * width * height);
     // set clear color and clear back buffer with it
     clear_color = 0xFF000000;
+    // update config values
+    config.width = width;
+    config.height = height;
     screen_clear_back_buffer();
     screen_clear_z_buffer();
     log_debug("screen: (%d,%d) buffer: (%d,%d)", display_mode.w, display_mode.h,
