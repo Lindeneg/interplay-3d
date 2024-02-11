@@ -1,7 +1,7 @@
 3D renderer written from scratch in C. **Purely** for educational purposes, as I want to better understand the
 beautiful mathematics behind it all.
 
-![example](./assets/demo-png)
+![example](./assets/demo.png)
 
 In order to build the program take a look at the [cmake file](./CMakeLists.txt). In a nutshell [SDL2](https://github.com/libsdl-org/SDL/releases/tag/release-2.30.0), [SDL2 Image](https://github.com/libsdl-org/SDL_image/releases/tag/release-2.8.2), [SDL2 TTF](https://github.com/libsdl-org/SDL_ttf/releases/tag/release-2.22.0) and [micro-ui](https://github.com/rxi/microui) are required dependencies, the latter of which is added as a [git submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
 
