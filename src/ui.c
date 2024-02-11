@@ -2,6 +2,7 @@
 
 #include <microui.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "./core/array.h"
@@ -16,6 +17,7 @@
 #include "./graphics/screen.h"
 #include "./log.h"
 #include "./utils.h"
+#include "globals.h"
 
 #define CHECKBOX(name, var, target)     \
     if (mu_checkbox(ctx, name, &var)) { \
@@ -36,9 +38,12 @@ global_internal float scaling_range[2];
 
 global_internal char mesh_buf[128];
 global_internal char texture_buf[128];
+global_internal char width_buf[128];
+global_internal char height_buf[128];
 global_internal int selected_entity_id = -1;
 global_internal bool camera_selected = false;
 global_internal bool light_selected = false;
+global_internal bool screen_selected = false;
 global_internal text_texture_t text_texture;
 
 // https://github.com/rxi/microui/blob/master/demo/main.c#L207-L211
@@ -138,6 +143,58 @@ global_internal void build_light_control_ui() {
                      translation_range[1]);
         float_slider(&light.direction.z, translation_range[0],
                      translation_range[1]);
+        mu_end_window(ctx);
+    }
+}
+
+global_internal void build_screen_control_ui() {
+    vec2i_t screen_size = screen_get_size();
+    vec2f_t screen_ratio = screen_get_size_ratio();
+    if (mu_begin_window_ex(
+            ctx, "Screen Buffer Size",
+            mu_rect(0, (screen_size.y / screen_ratio.y) - (150 + 120), 250,
+                    120),
+            MU_OPT_NOCLOSE | MU_OPT_NORESIZE)) {
+        int width_submitted = 0;
+        int height_submitted = 0;
+        mu_layout_row(ctx, 2, (int[]){50, 120}, 0);
+        mu_label(ctx, "Width");
+        if (mu_textbox(ctx, width_buf, sizeof(width_buf)) & MU_RES_SUBMIT) {
+            mu_set_focus(ctx, ctx->last_id);
+            width_submitted = 1;
+        }
+        mu_layout_row(ctx, 2, (int[]){50, 120}, 0);
+        mu_label(ctx, "Height");
+        if (mu_textbox(ctx, height_buf, sizeof(height_buf)) & MU_RES_SUBMIT) {
+            mu_set_focus(ctx, ctx->last_id);
+            height_submitted = 1;
+        }
+        mu_layout_row(ctx, 1, (int[]){-1}, 0);
+        if (mu_button(ctx, "Resize")) {
+            width_submitted = 1;
+            height_submitted = 1;
+        }
+        if (width_submitted || height_submitted) {
+            vec2i_t display_size = screen_get_display_size();
+            int w = strtol(width_buf, NULL, 10);
+            int h = strtol(height_buf, NULL, 10);
+            int new_width = config.width;
+            int new_height = config.height;
+            if (w >= 100 && w <= display_size.x) {
+                new_width = w;
+            }
+            if (h >= 100 && h <= display_size.y) {
+                new_height = h;
+            }
+            width_buf[0] = '\0';
+            height_buf[0] = '\0';
+            if (new_height != config.width || new_height != config.height) {
+                screen_set_size(vec2i_new(new_width, new_height));
+                context_resize(new_width, new_height,
+                               to_degrees(perspective.fov), perspective.z_near,
+                               perspective.z_far);
+            }
+        }
         mu_end_window(ctx);
     }
 }
@@ -288,13 +345,13 @@ global_internal void build_control_ui() {
         mu_text(ctx, "Core Control");
         mu_layout_row(ctx, 2, (int[]){92, 92}, 0);
         const char *cam_text = camera_selected ? "camera*" : "camera";
-        const char *light_text = light_selected ? "light*" : "light";
+        const char *screen_text = screen_selected ? "screen*" : "screen";
+        // const char *light_text = light_selected ? "light*" : "light";
         if (mu_button(ctx, cam_text)) {
             camera_selected = !camera_selected;
         }
-        if (mu_button(ctx, light_text)) {
-            // TODO enable light control
-            // light_selected = !light_selected;
+        if (mu_button(ctx, screen_text)) {
+            screen_selected = !screen_selected;
         }
         mu_text(ctx, "Entity Control");
         linked_list_node_t *current = entities.head;
@@ -416,6 +473,9 @@ void ui_process_render(void) {
     }
     if (light_selected) {
         build_light_control_ui();
+    }
+    if (screen_selected) {
+        build_screen_control_ui();
     }
     if (selected_entity_id > -1) {
         build_entity_control_ui();

@@ -45,6 +45,8 @@ float flerp(float a, float b, float t) { return a + t * (b - a); }
 
 float to_radians(float degrees) { return (degrees * PI) / 180.0f; }
 
+float to_degrees(float radians) { return (radians * 180.0f) / PI; }
+
 bool can_load_file(const char *base_path, const char *filename) {
     FILE *file;
     char path[256];

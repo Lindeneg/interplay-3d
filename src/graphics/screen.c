@@ -124,6 +124,10 @@ bool screen_set_size(vec2i_t size) {
 
 vec2i_t screen_get_size(void) { return (vec2i_t){width, height}; }
 
+vec2i_t screen_get_display_size(void) {
+    return (vec2i_t){display_mode.w, display_mode.h};
+}
+
 vec2f_t screen_get_size_ratio(void) {
     return vec2f_new((float)width / (float)display_mode.w,
                      (float)height / (float)display_mode.h);

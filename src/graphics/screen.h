@@ -13,6 +13,8 @@ bool screen_set_size(vec2i_t size);
 
 vec2i_t screen_get_size(void);
 
+vec2i_t screen_get_display_size(void);
+
 vec2f_t screen_get_size_ratio(void);
 
 SDL_Renderer *screen_get_renderer(void);

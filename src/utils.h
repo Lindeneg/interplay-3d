@@ -27,6 +27,8 @@ float flerp(float a, float b, float t);
 
 float to_radians(float degrees);
 
+float to_degrees(float radians);
+
 bool can_load_file(const char *base_path, const char *filename);
 
 char *extract_filename(const char *filepath, const char *required_extension);
