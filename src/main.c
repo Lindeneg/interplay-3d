@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "./core/context.h"
 #include "./core/manager.h"
 #include "./graphics/screen.h"
 
 int main(int argc, char *argv[]) {
-    // get config path
     char config_file[PATH_LENGTH] = "./config.interplay";
-    if (argc > 1) {
+    if (argc > 1 && strncmp(argv[1], "config=", 1) == 0) {
         sscanf_s(argv[1], "config=%s", config_file, PATH_LENGTH);
     }
     // parse config
@@ -20,8 +20,8 @@ int main(int argc, char *argv[]) {
         return EXIT_FAILURE;
     }
     // set screen buffer size
-    // TODO allow to resize (without restart) via UI (and also via config)
-    if (!screen_set_size((vec2i_t){800, 600})) {
+    // TODO allow to resize (without restart) via UI
+    if (!screen_set_size((vec2i_t){config.width, config.height})) {
         return EXIT_FAILURE;
     }
     // init TTF support

@@ -11,7 +11,8 @@
 #include "./array.h"
 #include "./mem.h"
 
-config_t config = {.assets_folder = '\0', .ttf_file = '\0'};
+config_t config = {
+    .assets_folder = '\0', .ttf_file = '\0', .width = 0, .height = 0};
 loop_timing_t loop_timing = {.update = 0, .render = 0, .fps = 0};
 perspective_t perspective = {.aspect_x = 0.0f,
                              .aspect_y = 0.0f,
@@ -88,13 +89,15 @@ bool context_parse_config_file(char cfg_file[PATH_LENGTH]) {
             int log_level;
             sscanf_s(line, "log-level=%d", &log_level);
             log_set_level(log_level);
-        }
-        if (strncmp(line, "assets_folder=", 1) == 0) {
+        } else if (strncmp(line, "assets_folder=", 1) == 0) {
             sscanf_s(line, "assets_folder=%s", config.assets_folder,
                      PATH_LENGTH);
-        }
-        if (strncmp(line, "ttf_file=", 1) == 0) {
+        } else if (strncmp(line, "ttf_file=", 1) == 0) {
             sscanf_s(line, "ttf_file=%s", config.ttf_file, PATH_LENGTH);
+        } else if (strncmp(line, "width=", 1) == 0) {
+            sscanf_s(line, "width=%d", &config.width);
+        } else if (strncmp(line, "height=", 1) == 0) {
+            sscanf_s(line, "height=%d", &config.height);
         }
     }
     fclose(file);
@@ -109,6 +112,7 @@ bool context_parse_config_file(char cfg_file[PATH_LENGTH]) {
     log_debug("found log_level %d", log_get_level());
     log_debug("found assets_folder %s", config.assets_folder);
     log_debug("found ttf_file %s", config.ttf_file);
+    log_debug("found (width,height) (%d,%d)", config.width, config.height);
     return true;
 }
 

@@ -23,6 +23,8 @@ typedef struct perspective {
 typedef struct config {
     char assets_folder[PATH_LENGTH];
     char ttf_file[PATH_LENGTH];
+    int width;
+    int height;
 } config_t;
 
 typedef struct mesh_data {

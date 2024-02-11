@@ -117,7 +117,8 @@ bool screen_set_size(vec2i_t size) {
     clear_color = 0xFF000000;
     screen_clear_back_buffer();
     screen_clear_z_buffer();
-    log_verbose("buffer size w=%d,h=%d", width, height);
+    log_debug("screen: (%d,%d) buffer: (%d,%d)", display_mode.w, display_mode.h,
+              width, height);
     return true;
 }
 
