@@ -75,26 +75,26 @@ void context_destroy(void) {
     linked_list_clear(&textures);
 }
 
-bool context_parse_config_file(void) {
-    local_persist const char *cfg_file = "./config.interplay";
+bool context_parse_config_file(char cfg_file[PATH_LENGTH]) {
     FILE *file;
     fopen_s(&file, cfg_file, "r");
     if (!file) {
         log_error("failed to open config %s", cfg_file);
         return false;
     }
-    char line[128];
-    while (fgets(line, 128, file)) {
+    char line[512];
+    while (fgets(line, 512, file)) {
         if (strncmp(line, "log-level=", 1) == 0) {
             int log_level;
             sscanf_s(line, "log-level=%d", &log_level);
             log_set_level(log_level);
         }
         if (strncmp(line, "assets_folder=", 1) == 0) {
-            sscanf_s(line, "assets_folder=%s", config.assets_folder, 128);
+            sscanf_s(line, "assets_folder=%s", config.assets_folder,
+                     PATH_LENGTH);
         }
         if (strncmp(line, "ttf_file=", 1) == 0) {
-            sscanf_s(line, "ttf_file=%s", config.ttf_file, 128);
+            sscanf_s(line, "ttf_file=%s", config.ttf_file, PATH_LENGTH);
         }
     }
     fclose(file);

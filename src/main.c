@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 
 #include "./core/context.h"
@@ -5,8 +6,13 @@
 #include "./graphics/screen.h"
 
 int main(int argc, char *argv[]) {
+    // get config path
+    char config_file[PATH_LENGTH] = "./config.interplay";
+    if (argc > 1) {
+        sscanf_s(argv[1], "config=%s", config_file, PATH_LENGTH);
+    }
     // parse config
-    if (!context_parse_config_file()) {
+    if (!context_parse_config_file(config_file)) {
         return EXIT_FAILURE;
     }
     // init SDL core

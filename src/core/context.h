@@ -7,6 +7,8 @@
 #include "../graphics/triangle.h"
 #include "../math/mat4.h"
 
+#define PATH_LENGTH 256
+
 typedef struct loop_timing {
     float update, render, fps;
 } loop_timing_t;
@@ -19,8 +21,8 @@ typedef struct perspective {
 } perspective_t;
 
 typedef struct config {
-    char assets_folder[128];
-    char ttf_file[128];
+    char assets_folder[PATH_LENGTH];
+    char ttf_file[PATH_LENGTH];
 } config_t;
 
 typedef struct mesh_data {
@@ -51,6 +53,6 @@ void context_resize(int width, int height, float fov_in_degrees, float z_near,
 
 void context_destroy(void);
 
-bool context_parse_config_file(void);
+bool context_parse_config_file(char config_path[PATH_LENGTH]);
 
 #endif  // INTERPLAY_CORE_CONTEXT_H_
