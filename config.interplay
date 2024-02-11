@@ -13,5 +13,6 @@ ttf_file=./assets/open-sans.ttf
 log-level=4
 
 # buffer-size if set to 0 fullscreen values are used
-width=0
-height=0
+width=800
+height=600
+

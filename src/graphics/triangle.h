@@ -34,6 +34,8 @@ vec3f_t get_triangle_normal(vec4f_t vertices[3]);
 // draw unfilled/outlined triangle
 void draw_triangle(vec2i_t p0, vec2i_t p1, vec2i_t p2, color_t color);
 
+// TODO try to refactor the two below functions for performance
+
 // draw triangle filled with solid color
 void draw_filled_triangle(filled_triangle_point_t *p0,
                           filled_triangle_point_t *p1,

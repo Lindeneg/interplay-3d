@@ -7,9 +7,9 @@ light_t light = {.direction = {0, 0, 0}};
 void light_init(vec3f_t direction) { light.direction = direction; }
 
 color_t light_apply_intensity(color_t color, float factor) {
-    if (is_lesserf(factor, 0.0f)) {
+    if (is_lesserf(factor, 0)) {
         factor = 0.0f;
-    } else if (is_greaterf(factor, 1.0f)) {
+    } else if (is_greaterf(factor, 1)) {
         factor = 1.0f;
     }
     color_t a = (color & 0xFF000000);

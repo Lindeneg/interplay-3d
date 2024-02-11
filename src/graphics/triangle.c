@@ -1,8 +1,8 @@
 #include "triangle.h"
 
+#include "../utils.h"
 #include "./renderer.h"
 #include "./screen.h"
-#include "../utils.h"
 
 #define ptr_swap(type, ptr1, ptr2) \
     type tmp = *ptr1;              \

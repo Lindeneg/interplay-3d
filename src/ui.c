@@ -95,7 +95,7 @@ global_internal void build_camera_control_ui() {
     vec2i_t screen_size = screen_get_size();
     vec2f_t screen_ratio = screen_get_size_ratio();
     if (mu_begin_window_ex(
-            ctx, "camera_t Position",
+            ctx, "Camera Position",
             mu_rect(0, (screen_size.y / screen_ratio.y) - 150, 250, 150),
             MU_OPT_NOCLOSE | MU_OPT_NORESIZE)) {
         mu_layout_row(ctx, 3, (int[]){77, 77, 77}, 0);
@@ -364,7 +364,7 @@ bool ui_init(void) {
     rotation_range[1] = to_radians(360);
     translation_range[0] = -(perspective.z_far + 20);
     translation_range[1] = perspective.z_far + 20;
-    scaling_range[0] = 0.1f;
+    scaling_range[0] = 0.01f;
     scaling_range[1] = 5.0f;
     return true;
 }
