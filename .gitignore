@@ -18,6 +18,7 @@ lib
 # ignore-ignore default font and simple cube
 !assets/open-sans.ttf
 !assets/cube.obj
+!assets/demo.png
 
 # Clion stuff
 .idea
