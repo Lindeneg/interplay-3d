@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.27)
 project(interplay C)
 
 set(CMAKE_C_STANDARD 23)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/interplay)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
 set(CMAKE_EXPORT_COMPILE_COMMANDS true)
 
 find_library(SDL2_LIBRARY SDL2 PATHS /Library/Frameworks)
