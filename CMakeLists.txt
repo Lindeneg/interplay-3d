@@ -1,22 +1,24 @@
 cmake_minimum_required(VERSION 3.27)
 project(interplay C)
 
-set(SDL2_PATH "D:/SDL/SDL2-VC-2.30.0")
-set(SDL2_IMAGE_PATH "D:/SDL/SDL2_image-VC-2.8.2")
-set(SDL2_TTF_PATH "D:/SDL/SDL2_ttf-VC-2.22.0")
-set(MICRO_UI_PATH "./microui/src")
-
 set(CMAKE_C_STANDARD 23)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/interplay)
 set(CMAKE_EXPORT_COMPILE_COMMANDS true)
 
-include_directories("${SDL2_PATH}/include"
-        "${SDL2_IMAGE_PATH}/include"
-        "${SDL2_TTF_PATH}/include"
-        "${MICRO_UI_PATH}")
+find_library(SDL2_LIBRARY SDL2 PATHS /Library/Frameworks)
+find_library(SDL2_IMAGE_LIBRARY SDL2_image PATHS /Library/Frameworks)
+find_library(SDL2_TTF_LIBRARY SDL2_ttf PATHS /Library/Frameworks)
 
-add_executable(interplay src/main.c ${MICRO_UI_PATH}/microui.c
+include_directories(/Library/Frameworks/SDL2.framework/Headers)
+include_directories(/Library/Frameworks/SDL2_image.framework/Headers)
+include_directories(/Library/Frameworks/SDL2_ttf.framework/Headers)
+
+include_directories(./microui/src)
+
+add_executable(interplay src/main.c ./microui/src/microui.c
         src/globals.h
+        src/compat.c
+        src/compat.h
         src/utils.c
         src/utils.h
         src/log.c
@@ -58,7 +60,4 @@ add_executable(interplay src/main.c ${MICRO_UI_PATH}/microui.c
         src/graphics/camera.h
 )
 
-target_link_libraries(interplay "${SDL2_PATH}/lib/x64/SDL2main.lib"
-        "${SDL2_PATH}/lib/x64/SDL2.lib"
-        "${SDL2_IMAGE_PATH}/lib/x64/SDL2_image.lib"
-        "${SDL2_TTF_PATH}/lib/x64/SDL2_ttf.lib")
+target_link_libraries(interplay ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2_TTF_LIBRARY})

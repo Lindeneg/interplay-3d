@@ -9,7 +9,7 @@
 int main(int argc, char *argv[]) {
     char config_file[PATH_LENGTH] = "./config.interplay";
     if (argc > 1 && strncmp(argv[1], "config=", 1) == 0) {
-        sscanf_s(argv[1], "config=%s", config_file, PATH_LENGTH);
+        sscanf(argv[1], "config=%s", config_file);
     }
     // parse config
     if (!context_parse_config_file(config_file)) {
