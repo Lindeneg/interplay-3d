@@ -1,5 +1,3 @@
-*note: it will only compile on windows at the moment due to me using microsofts "security enhancements", such as [fopen_s](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/fopen-s-wfopen-s?view=msvc-170). At some point, I'll either get some pound defines in there or just omit using microsoft specific stuff*
-
 3D renderer written from scratch in C. **Purely** for educational purposes, as I want to better understand the
 beautiful mathematics behind it all.
 
