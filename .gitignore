@@ -47,13 +47,6 @@ lib
 *.gch
 *.pch
 
-# Libraries
-*.dll
-*.lib
-*.a
-*.la
-*.lo
-
 # Macos stuff
 .DS_Store
 
