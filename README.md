@@ -7,28 +7,29 @@ beautiful mathematics behind it all.
 
 #### Compilation
 
-Regardless of platform, run these two commands:
+Regardless of platform, ensure you have [cmake](https://cmake.org/) and run these two commands:
 
 `git submodule init`
 
 `git submodule update`
 
-###### Linux
+Then either setup `SDL`, `SDL_image` and `SDL_tff` using your own preferred method, or follow below instructions.
 
--   Ensure you have `SDL2`, `SDL2_image` and `SDL2_ttf` available on your system.
--   Run build script: `./build-linux.sh`
+##### Windows
 
-###### MacOS
+Install [Ninja](https://github.com/ninja-build/ninja/releases) and [clang](https://clang.llvm.org/), then run:
 
--   Ensure you have `SDL2`, `SDL2_image` and `SDL2_ttf` extracted inside `/Library/Frameworks` folder.
--   `.dmg` files can be downloaded [here](https://github.com/libsdl-org/SDL/releases/download/release-2.30.0/SDL2-2.30.0.dmg), [here](https://github.com/libsdl-org/SDL_image/releases/download/release-2.8.2/SDL2_image-2.8.2.dmg) and [here](https://github.com/libsdl-org/SDL_ttf/releases/download/release-2.22.0/SDL2_ttf-2.22.0.dmg), respectively.
--   Run build script: `./build-macos.sh`
+-   `.\generate-windows.bat`
+-   `.\build-windows.bat`
+-   `.\build\bin\interplay.exe`
 
-###### Windows
+##### MacOS / Linux
 
--   Make sure you're in a developer console and have access to "CL.exe" compiler, x64 version.
--   Set SDL paths inside [build-windows-vc.bat](./build-windows-vc.bat) on line 15, 17 and 19.
--   Run the script i.e `.\build-windows-vc.bat`
+###### mac users will probably need to whitelist due to security stuff
+
+-   `cmake .`
+-   `make`
+-   `./bin/interplay`
 
 ---
 
