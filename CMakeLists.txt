@@ -15,10 +15,6 @@ if (APPLE)
     include_directories("${CMAKE_SOURCE_DIR}/vendor/macos/SDL2_ttf.framework/Headers")
 endif()
 
-if(UNIX AND NOT APPLE)
-    # TODO
-endif()
-
 if(WIN32)
     include_directories("${CMAKE_SOURCE_DIR}/vendor/windows/SDL2-VC-2.30.0/include")
     include_directories("${CMAKE_SOURCE_DIR}/vendor/windows/SDL2_image-VC-2.8.2/include")
@@ -74,10 +70,6 @@ add_executable(interplay src/main.c ./microui/src/microui.c
 
 if (APPLE)
     target_link_libraries(interplay ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2_TTF_LIBRARY})
-endif()
-
-if(UNIX AND NOT APPLE)
-    # TODO
 endif()
 
 if(WIN32)

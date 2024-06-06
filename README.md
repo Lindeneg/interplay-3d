@@ -23,9 +23,7 @@ Install [Ninja](https://github.com/ninja-build/ninja/releases) and [clang](https
 -   `.\build-windows.bat`
 -   `.\build\bin\interplay.exe`
 
-##### MacOS / Linux
-
-###### mac users will probably need to whitelist due to security stuff
+##### MacOS
 
 -   `cmake .`
 -   `make`
