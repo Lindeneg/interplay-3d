@@ -1,3 +1,6 @@
+#if defined(_WIN32) || defined(WIN32)
+#define SDL_MAIN_HANDLED
+#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
