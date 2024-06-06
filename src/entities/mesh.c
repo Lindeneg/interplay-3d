@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "../compat.h"
 #include "../core/array.h"
 #include "../core/mem.h"
 #include "../graphics/clipping.h"
@@ -226,10 +227,9 @@ global_internal void destroy_mesh(entity_t *entity) {
 }
 
 global_internal mesh_data_t *load_obj_file(const char *obj_file, char *name) {
-    FILE *file;
     char path[256];
     sprintf(path, "%s/%s", config.assets_folder, obj_file);
-    fopen_s(&file, path, "r");
+    FILE *file = open_file(path);
     if (!file) {
         log_error("failed to open file %s", obj_file);
         return NULL;
@@ -244,12 +244,12 @@ global_internal mesh_data_t *load_obj_file(const char *obj_file, char *name) {
         // vertex information
         if (strncmp(line, "v ", 2) == 0) {
             vec3f_t vertex;
-            sscanf_s(line, "v %f %f %f", &vertex.x, &vertex.y, &vertex.z);
+            scan_line(line, "v %f %f %f", &vertex.x, &vertex.y, &vertex.z);
             array_push(mesh_data->vertices, vertex)
         }
         if (strncmp(line, "vt ", 3) == 0) {
             texture_uv_t texcoord;
-            sscanf_s(line, "vt %f %f", &texcoord.u, &texcoord.v);
+            scan_line(line, "vt %f %f", &texcoord.u, &texcoord.v);
             array_push(texture_coords, texcoord)
         }
         // face information
@@ -257,11 +257,11 @@ global_internal mesh_data_t *load_obj_file(const char *obj_file, char *name) {
             int vertex_indices[3];
             int texture_indices[3];
             int normal_indices[3];
-            sscanf_s(line, "f %d/%d/%d %d/%d/%d %d/%d/%d", &vertex_indices[0],
-                     &texture_indices[0], &normal_indices[0],
-                     &vertex_indices[1], &texture_indices[1],
-                     &normal_indices[1], &vertex_indices[2],
-                     &texture_indices[2], &normal_indices[2]);
+            scan_line(line, "f %d/%d/%d %d/%d/%d %d/%d/%d", &vertex_indices[0],
+                      &texture_indices[0], &normal_indices[0],
+                      &vertex_indices[1], &texture_indices[1],
+                      &normal_indices[1], &vertex_indices[2],
+                      &texture_indices[2], &normal_indices[2]);
             triangle_face_t face = {
                 .a = vertex_indices[0] - 1,
                 .b = vertex_indices[1] - 1,
@@ -276,7 +276,7 @@ global_internal mesh_data_t *load_obj_file(const char *obj_file, char *name) {
     array_free(texture_coords);
     fclose(file);
     mesh_data->max_triangle_count =
-        min(max(MIN_MESH_TRIANGLES,
+        MIN(MAX(MIN_MESH_TRIANGLES,
                 array_size(mesh_data->faces) + MAX_NUM_POLY_TRIANGLES),
             MAX_MESH_TRIANGLES);
     linked_list_append(&meshes, mesh_data);

@@ -1,5 +1,7 @@
 #include "linked-list.h"
 
+#include <stdio.h>
+
 #include "../globals.h"
 #include "../log.h"
 #include "./mem.h"

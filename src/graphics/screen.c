@@ -1,7 +1,7 @@
 #include "screen.h"
 
+#include <SDL.h>
 #include <SDL_image.h>
-#include <SDL_render.h>
 #include <assert.h>
 
 #include "../core/context.h"

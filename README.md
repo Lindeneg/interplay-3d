@@ -1,24 +1,49 @@
-*note: it will only compile on windows at the moment due to me using microsofts "security enhancements", such as [fopen_s](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/fopen-s-wfopen-s?view=msvc-170). At some point, I'll either get some pound defines in there or just omit using microsoft specific stuff*
-
 3D renderer written from scratch in C. **Purely** for educational purposes, as I want to better understand the
 beautiful mathematics behind it all.
 
 ![example](./assets/demo.png)
 
-In order to build the program take a look at the [cmake file](./CMakeLists.txt). In a nutshell [SDL2](https://github.com/libsdl-org/SDL/releases/tag/release-2.30.0), [SDL2 Image](https://github.com/libsdl-org/SDL_image/releases/tag/release-2.8.2), [SDL2 TTF](https://github.com/libsdl-org/SDL_ttf/releases/tag/release-2.22.0) and [micro-ui](https://github.com/rxi/microui) are required dependencies, the latter of which is added as a [git submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
+---
+
+#### Compilation
+
+Regardless of platform, ensure you have [cmake](https://cmake.org/).
+
+You also have to run these two commands:
+
+`git submodule init`
+
+`git submodule update`
+
+Then either setup `SDL`, `SDL_image` and `SDL_tff` using your own preferred method, or follow below instructions.
+
+##### Windows
+
+Install [Ninja](https://github.com/ninja-build/ninja/releases) and [clang](https://clang.llvm.org/), then run:
+
+-   `.\generate-windows.bat`
+-   `.\build-windows.bat`
+-   `.\build\bin\interplay.exe`
+
+##### MacOS
+
+-   `cmake .`
+-   `make`
+-   `./bin/interplay`
 
 ---
 
+#### Acknowledgements
+
 I've used two primary resources, and I want to extend gratitude to the people behind those resources:
 
-- [Gustavo Pezzi](https://twitter.com/pikuma)
+-   [Gustavo Pezzi](https://twitter.com/pikuma)
 
 Gustavo's course [3D Computer Graphics Programming](https://pikuma.com/courses/learn-3d-computer-graphics-programming) has been my main resources to get an introductory understanding of 3D maths.
 Gustavo is a phenomenal teacher with a great focus on mathematics. His clarity and thoroughness is something I value a great deal.
 Besides, he also has a [YouTube channel](https://www.youtube.com/@pikuma) with loads of free awesome content.
 
-- [Fletcher Dunn](https://twitter.com/ZPostFacto)
+-   [Fletcher Dunn](https://twitter.com/ZPostFacto)
 
 The book [3D Math Primer for Graphics and Game Development](https://gamemath.com/book/intro.html)
 contains excellent explanations (with problems) and has been an enjoyable read. It's even free! Thank you, Fletcher Dunn.
-

@@ -51,7 +51,11 @@ bool can_load_file(const char *base_path, const char *filename) {
     FILE *file;
     char path[256];
     sprintf(path, "%s/%s", base_path, filename);
+#ifdef _WIN32
     fopen_s(&file, path, "r");
+#elif __APPLE__ || __linux__
+    file = fopen(path, "r");
+#endif
     if (!file) {
         return false;
     }
@@ -84,7 +88,11 @@ char *extract_filename(const char *filepath, const char *required_extension) {
     if (!filename) {
         return NULL;
     }
+#ifdef _WIN32
     strncpy_s(filename, length + 1, last_slash + offset, length);
+#elif __APPLE__ || __linux__
+    strncpy(filename, last_slash + offset, length);
+#endif
     filename[length] = '\0';
     return filename;
 }

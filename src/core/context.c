@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "../compat.h"
 #include "../entities/entity.h"
 #include "../graphics/clipping.h"
 #include "../log.h"
@@ -77,8 +78,7 @@ void context_destroy(void) {
 }
 
 bool context_parse_config_file(char cfg_file[PATH_LENGTH]) {
-    FILE *file;
-    fopen_s(&file, cfg_file, "r");
+    FILE *file = open_file(cfg_file);
     if (!file) {
         log_error("failed to open config %s", cfg_file);
         return false;
@@ -88,17 +88,25 @@ bool context_parse_config_file(char cfg_file[PATH_LENGTH]) {
         if (strncmp(&line[0], "#", 1) == 0) continue;
         if (strncmp(line, "log-level=", 1) == 0) {
             int log_level;
-            sscanf_s(line, "log-level=%d", &log_level);
+            scan_line(line, "log-level=%d", &log_level);
             log_set_level(log_level);
         } else if (strncmp(line, "assets_folder=", 1) == 0) {
-            sscanf_s(line, "assets_folder=%s", config.assets_folder,
-                     PATH_LENGTH);
+#if defined(_WIN32) || defined(WIN32)
+            scan_line(line, "assets_folder=%s", config.assets_folder,
+                      PATH_LENGTH);
+#else
+            scan_line(line, "assets_folder=%s", config.assets_folder);
+#endif
         } else if (strncmp(line, "ttf_file=", 1) == 0) {
-            sscanf_s(line, "ttf_file=%s", config.ttf_file, PATH_LENGTH);
+#if defined(_WIN32) || defined(WIN32)
+            scan_line(line, "ttf_file=%s", config.ttf_file, PATH_LENGTH);
+#else
+            scan_line(line, "ttf_file=%s", config.ttf_file);
+#endif
         } else if (strncmp(line, "width=", 1) == 0) {
-            sscanf_s(line, "width=%d", &config.width);
+            scan_line(line, "width=%d", &config.width);
         } else if (strncmp(line, "height=", 1) == 0) {
-            sscanf_s(line, "height=%d", &config.height);
+            scan_line(line, "height=%d", &config.height);
         }
     }
     fclose(file);

@@ -2,6 +2,13 @@
 
 # Build directory
 build
+CMakeFiles
+interplay
+Makefile
+CMakeCache.txt
+clean
+cmake_install.cmake
+.cmake
 .cache
 cmake-build-debug
 compile_commands.json
@@ -46,6 +53,9 @@ lib
 *.a
 *.la
 *.lo
+
+# Macos stuff
+.DS_Store
 
 # Shared objects (inc. Windows DLLs)
 *.so
