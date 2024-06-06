@@ -7,7 +7,9 @@ beautiful mathematics behind it all.
 
 #### Compilation
 
-Regardless of platform, ensure you have [cmake](https://cmake.org/) and run these two commands:
+Regardless of platform, ensure you have [cmake](https://cmake.org/).
+
+You also have to run these two commands:
 
 `git submodule init`
 
