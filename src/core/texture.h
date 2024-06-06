@@ -1,7 +1,7 @@
 #ifndef INTERPLAY_CORE_TEXTURE_H_
 #define INTERPLAY_CORE_TEXTURE_H_
 
-#include <SDL_surface.h>
+#include <SDL2/SDL_surface.h>
 
 typedef struct texture {
     int id;

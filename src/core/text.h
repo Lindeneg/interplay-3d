@@ -1,8 +1,8 @@
 #ifndef INTERPLAY_CORE_TEXT_H_
 #define INTERPLAY_CORE_TEXT_H_
 
-#include <SDL_render.h>
-#include <SDL_ttf.h>
+#include <SDL2/SDL_render.h>
+#include <SDL2/SDL_ttf.h>
 #include <stdbool.h>
 
 #include "../globals.h"

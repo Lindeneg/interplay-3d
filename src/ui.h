@@ -1,7 +1,7 @@
 #ifndef INTERPLAY_UI_H_
 #define INTERPLAY_UI_H_
 
-#include <SDL_events.h>
+#include <SDL2/SDL_events.h>
 #include <microui.h>
 #include <stdbool.h>
 

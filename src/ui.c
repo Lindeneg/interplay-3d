@@ -11,13 +11,13 @@
 #include "./core/text.h"
 #include "./entities/entity.h"
 #include "./entities/mesh.h"
+#include "./globals.h"
 #include "./graphics/camera.h"
 #include "./graphics/light.h"
 #include "./graphics/renderer.h"
 #include "./graphics/screen.h"
 #include "./log.h"
 #include "./utils.h"
-#include "globals.h"
 
 #define CHECKBOX(name, var, target)     \
     if (mu_checkbox(ctx, name, &var)) { \

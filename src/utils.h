@@ -1,7 +1,7 @@
 #ifndef INTERPLAY_UTILS_H_
 #define INTERPLAY_UTILS_H_
 
-#include <SDL_pixels.h>
+#include <SDL2/SDL_pixels.h>
 #include <microui.h>
 #include <stdbool.h>
 

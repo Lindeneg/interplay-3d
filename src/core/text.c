@@ -1,6 +1,6 @@
 #include "text.h"
 
-#include <SDL_ttf.h>
+#include <SDL2/SDL_ttf.h>
 
 #include "../log.h"
 #include "../utils.h"

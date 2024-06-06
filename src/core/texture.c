@@ -1,7 +1,7 @@
 #include "texture.h"
 
-#include <SDL_image.h>
-#include <SDL_surface.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_surface.h>
 #include <stdio.h>
 #include <string.h>
 

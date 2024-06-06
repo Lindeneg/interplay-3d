@@ -1,7 +1,7 @@
 #ifndef INTERPLAY_GRAPHICS_CAMERA_H_
 #define INTERPLAY_GRAPHICS_CAMERA_H_
 
-#include <SDL_events.h>
+#include <SDL2/SDL_events.h>
 
 #include "../math/vec.h"
 
