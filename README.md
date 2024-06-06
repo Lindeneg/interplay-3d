@@ -7,6 +7,8 @@ beautiful mathematics behind it all.
 
 #### Compilation
 
+(*TODO: instead of having platform specific SDLs, which seems incredibly stupid, make a download script*)
+
 Regardless of platform, ensure you have [cmake](https://cmake.org/).
 
 You also have to run these two commands:
