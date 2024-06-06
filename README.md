@@ -7,29 +7,7 @@ beautiful mathematics behind it all.
 
 #### Compilation
 
-Regardless of platform, ensure you have [cmake](https://cmake.org/).
-
-You also have to run these two commands:
-
-`git submodule init`
-
-`git submodule update`
-
-Then either setup `SDL`, `SDL_image` and `SDL_tff` using your own preferred method, or follow below instructions.
-
-##### Windows
-
-Install [Ninja](https://github.com/ninja-build/ninja/releases) and [clang](https://clang.llvm.org/), then run:
-
--   `.\generate-windows.bat`
--   `.\build-windows.bat`
--   `.\build\bin\interplay.exe`
-
-##### MacOS
-
--   `cmake .`
--   `make`
--   `./bin/interplay`
+WIP
 
 ---
 
