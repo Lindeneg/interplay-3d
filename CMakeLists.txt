@@ -5,15 +5,17 @@ set(CMAKE_C_STANDARD 23)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
 set(CMAKE_EXPORT_COMPILE_COMMANDS true)
 
-find_library(SDL2_LIBRARY SDL2 PATHS /Library/Frameworks)
-find_library(SDL2_IMAGE_LIBRARY SDL2_image PATHS /Library/Frameworks)
-find_library(SDL2_TTF_LIBRARY SDL2_ttf PATHS /Library/Frameworks)
+if (APPLE)
+    find_library(SDL2_LIBRARY SDL2 PATHS "${CMAKE_SOURCE_DIR}/vendor/macos")
+    find_library(SDL2_IMAGE_LIBRARY SDL2_image PATHS "${CMAKE_SOURCE_DIR}/vendor/macos")
+    find_library(SDL2_TTF_LIBRARY SDL2_ttf PATHS "${CMAKE_SOURCE_DIR}/vendor/macos")
 
-include_directories(/Library/Frameworks/SDL2.framework/Headers)
-include_directories(/Library/Frameworks/SDL2_image.framework/Headers)
-include_directories(/Library/Frameworks/SDL2_ttf.framework/Headers)
+    include_directories("${CMAKE_SOURCE_DIR}/vendor/macos/SDL2.framework/Headers")
+    include_directories("${CMAKE_SOURCE_DIR}/vendor/macos/SDL2_image.framework/Headers")
+    include_directories("${CMAKE_SOURCE_DIR}/vendor/macos/SDL2_ttf.framework/Headers")
+endif()
 
-include_directories(./microui/src)
+include_directories("${CMAKE_SOURCE_DIR}/microui/src")
 
 add_executable(interplay src/main.c ./microui/src/microui.c
         src/globals.h
@@ -60,4 +62,6 @@ add_executable(interplay src/main.c ./microui/src/microui.c
         src/graphics/camera.h
 )
 
-target_link_libraries(interplay ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2_TTF_LIBRARY})
+if (APPLE)
+    target_link_libraries(interplay ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2_TTF_LIBRARY})
+endif()
