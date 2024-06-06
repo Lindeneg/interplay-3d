@@ -1,5 +1,8 @@
 @echo off
 
+:: Uses CL compiler:
+:: https://learn.microsoft.com/en-us/cpp/build/reference/compiler-command-line-syntax
+
 :: Remove previous build files
 @RD /S /Q ".\obj"
 @RD /S /Q ".\build"
@@ -40,14 +43,14 @@ SET SDL2_LIB="%SDL2_PATH%\lib\x64"
 SET SDL2_IMAGE_LIB="%SDL2_IMAGE_PATH%\lib\x64"
 SET SDL2_TTF_LIB="%SDL2_TTF_PATH%\lib\x64"
 
-set COMPILER_FLAGS=/EHsc /Fo%OBJ_DIR%\ /Fe%OUTPUT_DIR%\interplay.exe
+SET COMPILER_FLAGS=/EHsc /Fo%OBJ_DIR%\ /Fe%OUTPUT_DIR%\interplay.exe
 
-set COMPILER_INCLUDE=/I "%SDL2_PATH%/include" /I "%SDL2_IMAGE_PATH%/include" /I "%SDL2_TTF_PATH%/include" /I "%MICRO_UI_PATH%"
+SET COMPILER_INCLUDE=/I "%SDL2_PATH%/include" /I "%SDL2_IMAGE_PATH%/include" /I "%SDL2_TTF_PATH%/include" /I "%MICRO_UI_PATH%"
 
-set COMPILER_LINK=/link "%SDL2_LIB%\SDL2main.lib" "%SDL2_LIB%\SDL2.lib" "%SDL2_IMAGE_LIB%\SDL2_image.lib" "%SDL2_TTF_LIB%\SDL2_ttf.lib"
+SET COMPILER_LINK=/link "%SDL2_LIB%\SDL2main.lib" "%SDL2_LIB%\SDL2.lib" "%SDL2_IMAGE_LIB%\SDL2_image.lib" "%SDL2_TTF_LIB%\SDL2_ttf.lib"
 
 :: Compile the program
-cl %COMPILER_INCLUDE% %SRC_FILES% %COMPILER_FLAGS% %COMPILER_LINK%
+CL %COMPILER_INCLUDE% %SRC_FILES% %COMPILER_FLAGS% %COMPILER_LINK%
 
 :: Copy SDL2 DLL files
 COPY /Y "%SDL2_LIB%\SDL2.dll" ".\%OUTPUT_DIR%\"
