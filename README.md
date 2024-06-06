@@ -10,6 +10,7 @@ beautiful mathematics behind it all.
 Regardless of platform, run these two commands:
 
 `git submodule init`
+
 `git submodule update`
 
 ###### Linux
