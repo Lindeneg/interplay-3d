@@ -5,55 +5,22 @@ set(CMAKE_C_STANDARD 23)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
 set(CMAKE_EXPORT_COMPILE_COMMANDS true)
 
-include_directories("${CMAKE_SOURCE_DIR}/vendor/")
-include_directories("${CMAKE_SOURCE_DIR}/microui/src")
+add_compile_options(-ggdb -pedantic-errors -D DEBUG -Wall)
 
-add_executable(interplay src/main.c ./microui/src/microui.c
-        src/globals.h
-        src/compat.c
-        src/compat.h
-        src/utils.c
-        src/utils.h
-        src/log.c
-        src/log.h
-        src/ui.c
-        src/ui.h
-        src/math/vec.c
-        src/math/vec.h
-        src/math/mat4.c
-        src/math/mat4.h
-        src/entities/entity.h
-        src/entities/mesh.c
-        src/entities/mesh.h
-        src/core/linked-list.c
-        src/core/linked-list.h
-        src/core/array.c
-        src/core/array.h
-        src/core/context.c
-        src/core/context.h
-        src/core/mem.c
-        src/core/mem.h
-        src/core/text.c
-        src/core/text.h
-        src/core/manager.c
-        src/core/manager.h
-        src/core/texture.c
-        src/core/texture.h
-        src/graphics/screen.c
-        src/graphics/screen.h
-        src/graphics/renderer.c
-        src/graphics/renderer.h
-        src/graphics/triangle.c
-        src/graphics/triangle.h
-        src/graphics/clipping.c
-        src/graphics/clipping.h
-        src/graphics/light.c
-        src/graphics/light.h
-        src/graphics/camera.c
-        src/graphics/camera.h
-)
+set(MICRO_UI_PATH "${CMAKE_SOURCE_DIR}/vendor/microui/src")
+
+include_directories("${CMAKE_SOURCE_DIR}/includes/")
+include_directories(${MICRO_UI_PATH})
+
+file(GLOB_RECURSE PROJECT_SOURCES RELATIVE ${CMAKE_SOURCE_DIR} src/*.c)
+
+add_executable(interplay ${PROJECT_SOURCES} "${MICRO_UI_PATH}/microui.c")
 
 if (APPLE)
+    # TODO
+endif()
+
+if(UNIX AND NOT APPLE)
     # TODO
 endif()
 

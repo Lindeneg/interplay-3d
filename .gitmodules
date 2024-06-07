@@ -1,3 +1,3 @@
-[submodule "microui"]
-	path = microui
+[submodule "vendor/microui"]
+	path = vendor/microui
 	url = https://github.com/rxi/microui
