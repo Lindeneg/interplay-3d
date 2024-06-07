@@ -13,7 +13,7 @@
 #include "./mem.h"
 
 config_t config = {
-    .assets_folder = '\0', .ttf_file = '\0', .width = 0, .height = 0};
+    .assets_folder = {'\0'}, .ttf_file = {'\0'}, .width = 0, .height = 0};
 loop_timing_t loop_timing = {.update = 0, .render = 0, .fps = 0};
 perspective_t perspective = {.aspect_x = 0.0f,
                              .aspect_y = 0.0f,

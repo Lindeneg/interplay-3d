@@ -1,5 +1,7 @@
 #include "renderer.h"
 
+#include <stdlib.h>
+
 #include "./screen.h"
 
 void draw_vec2i(vec2i_t vec, color_t color) {

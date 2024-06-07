@@ -1,5 +1,7 @@
 #include "triangle.h"
 
+#include <stdlib.h>
+
 #include "../utils.h"
 #include "./renderer.h"
 #include "./screen.h"
