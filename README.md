@@ -7,8 +7,30 @@ beautiful mathematics behind it all.
 
 #### Compilation
 
-WIP
+Download required submodule
 
+-   `git submodule init`
+-   `git submodule update`
+
+And ensure `cmake` is installed.
+
+#### Mac / Linux
+
+Ensure sdl2, sdl2_image and sdl_ttf are installed on the system, then:
+
+-   `cmake .`
+-   `make`
+-   `./bin/interplay`
+
+#### Windows
+
+Either setup SDL yourself or use the scripts located in `./misc` folder:
+
+Do note, the scripts requires [ninja](https://github.com/ninja-build/ninja/releases) and [llvm](https://releases.llvm.org/download.html).
+
+1. `.\misc\generate.bat`
+2. `.\misc\build.bat`
+3. `.\misc\run.bat`
 
 ---
 
